@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Evil Button 💔</title>
+  <title>Evil Button Mobile 😈</title>
 
   <style>
     body {
@@ -19,25 +19,25 @@
 
     .container {
       text-align: center;
+      padding: 20px;
     }
 
     h1 {
-      margin-bottom: 40px;
-      font-size: 32px;
+      margin-bottom: 30px;
+      font-size: 26px;
     }
 
     button {
       font-size: 18px;
-      padding: 12px 30px;
+      padding: 12px 28px;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
+      margin: 10px;
     }
 
     #noBtn {
       background: #d50000;
       color: white;
-      margin-right: 20px;
     }
 
     #yesBtn {
@@ -46,42 +46,75 @@
       position: absolute;
       transform-origin: center;
     }
+
+    .shake {
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>wach atb9a m3aya dima?</h1>
+  <div class="container" id="container">
+    <h1 id="question">wach atb9a m3aya dima?</h1>
 
-    <button id="noBtn" onclick="noClicked()">NO</button>
+    <button id="noBtn">NO</button>
     <button id="yesBtn">YES</button>
   </div>
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
-    let scale = 1;
+    const noBtn = document.getElementById("noBtn");
+    const question = document.getElementById("question");
+    const container = document.getElementById("container");
 
-    yesBtn.addEventListener("mouseover", () => {
-      // Move randomly
+    let scale = 1;
+    let texts = [
+      "wach atb9a m3aya dima?",
+      "hmmm 🤨",
+      "matkdbch…",
+      "jawb b sda9a",
+      "3lach kat hreb?"
+    ];
+
+    // YES button evil (touch + hover for mobile)
+    function escapeYes() {
       const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
 
       yesBtn.style.left = x + "px";
       yesBtn.style.top = y + "px";
 
-      // Shrink
+      // shrink
       scale -= 0.1;
-      if (scale <= 0.1) {
+      if (scale <= 0.15) {
         yesBtn.style.display = "none";
+        question.innerText = "حتى مشى… 🤡";
       } else {
         yesBtn.style.transform = `scale(${scale})`;
       }
-    });
 
-    function noClicked() {
-      alert("knt 3arfaha 💔");
+      // change question text
+      question.innerText = texts[Math.floor(Math.random() * texts.length)];
     }
+
+    yesBtn.addEventListener("mouseover", escapeYes);
+    yesBtn.addEventListener("touchstart", escapeYes);
+
+    // NO button
+    noBtn.addEventListener("click", () => {
+      alert("knt 3arfaha 💔");
+      container.classList.add("shake");
+      setTimeout(() => container.classList.remove("shake"), 400);
+    });
   </script>
 
 </body>
