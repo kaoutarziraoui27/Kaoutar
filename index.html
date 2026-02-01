@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Evil Button 😈</title>
+  <title>Evil Button 💔</title>
 
   <style>
     body {
@@ -44,6 +44,7 @@
       background: #00c853;
       color: white;
       position: absolute;
+      transform-origin: center;
     }
   </style>
 </head>
@@ -51,7 +52,7 @@
 <body>
 
   <div class="container">
-    <h1>wach katbghini?</h1>
+    <h1>wach atb9a m3aya dima?</h1>
 
     <button id="noBtn" onclick="noClicked()">NO</button>
     <button id="yesBtn">YES</button>
@@ -59,18 +60,27 @@
 
   <script>
     const yesBtn = document.getElementById("yesBtn");
+    let scale = 1;
 
-    // Make YES button run away
     yesBtn.addEventListener("mouseover", () => {
+      // Move randomly
       const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth);
       const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight);
 
       yesBtn.style.left = x + "px";
       yesBtn.style.top = y + "px";
+
+      // Shrink
+      scale -= 0.1;
+      if (scale <= 0.1) {
+        yesBtn.style.display = "none";
+      } else {
+        yesBtn.style.transform = `scale(${scale})`;
+      }
     });
 
     function noClicked() {
-      alert("😏 knt 3arfaha");
+      alert("knt 3arfaha 💔");
     }
   </script>
 
